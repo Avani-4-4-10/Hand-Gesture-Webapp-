@@ -18,17 +18,16 @@ function take_SnapShot(){
 }
 console.log("ml5.version" , ml5.version)
 
-classifier=ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/QwXv8DHd-/model.json", ModelLoaded)
+classifier=ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/-ySOKJTMx/model.json", ModelLoaded)
 
 function ModelLoaded(){
     console.log("model loaded successfully")
 }
 function speak(){
     var synth=window.speechSynthesis
-    var speak_data1="The first prediction is "+prediction_1
-    var speak_data2="and the second predicition is "+prediction_2
-
-    var Utterthis=new SpeechSynthesisUtterance(speak_data1 + speak_data2)
+    var speak_data1="The prediction is "+prediction
+    
+    var Utterthis=new SpeechSynthesisUtterance(speak_data1)
     synth.speak(Utterthis)
 
 
@@ -45,38 +44,23 @@ function gotResult(error , results){
     else {
         console.log(results)
         prediction_1=results[0].label
-        prediction_2=results[1].label
+        
 
-        document.getElementById("result_emotion_name").innerHTML=prediction_1
-        document.getElementById("result_emotion_name2").innerHTML=prediction_2
+        document.getElementById("result_gesture_name").innerHTML=prediction_1
+        
         speak()
 
-        if(prediction_1=="Happy"){
-            document.getElementById("update_Emoji").innerHTML="&#128516;"
+        if(prediction=="Amazing"){
+            document.getElementById("update_Gesture").innerHTML="&#128076;"
 
         }
-        if(prediction_1=="Sad"){
-            document.getElementById("update_Emoji").innerHTML="&#128553;"
+        if(prediction=="Victory"){
+            document.getElementById("update_Gesture").innerHTML="&#9996;"
         }
-        if(prediction_1=="Surprised"){
-            document.getElementById("update_Emoji").innerHTML="&#128562;"
+        if(prediction=="Best"){
+            document.getElementById("update_Gesture").innerHTML="&#128077;"
         }
-        if(prediction_1=="Angry"){
-            document.getElementById("update_Emoji").innerHTML="&#128544;"
-        }
-        if(prediction_2=="Happy"){
-            document.getElementById("update_Emoji2").innerHTML="&#128516;"
-
-        }
-        if(prediction_2=="Sad"){
-            document.getElementById("update_Emoji2").innerHTML="&#128553;"
-        }
-        if(prediction_2=="Surprised"){
-            document.getElementById("update_Emoji2").innerHTML="&#128562;"
-        }
-        if(prediction_2=="Angry"){
-            document.getElementById("update_Emoji2").innerHTML="&#128544;"
-        }
+       
 
     }
 
